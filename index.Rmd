@@ -2,7 +2,7 @@
 title: "Fazendo amizade com a Phyton reticulada"
 subtitle: "Introdução ao uso de Python e R no RStudio com o pacote reticulate"  
 author: 
-  - "Beatriz Milz"
+  - 'Beatriz Milz  <img src="img/retic-featured-image-web2.png" alt="Python Reticulada" style="float:left;height:200px;"> <img src="img/reticulated_python.png" alt="Python Reticulada" style="float:left;height:200px;">'
 date: 'Outubro de 2021'
 institute: '<a href="https://2021.pythonbrasil.org.br/">Python Brasil 2021</a>'
 output:
