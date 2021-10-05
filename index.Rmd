@@ -1,0 +1,169 @@
+---
+title: "Fazendo amizade com a Phyton reticulada"
+subtitle: "Introdução ao uso de Python e R no RStudio com o pacote reticulate"  
+author: 
+  - "Beatriz Milz"
+date: 'Outubro de 2021'
+institute: '<a href="https://2021.pythonbrasil.org.br/">Python Brasil 2021</a>'
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      slideNumberFormat: "<a href='https://beatrizmilz.com/talk/'><i class='fas fa-external-link-alt'></i></a> - %current%/%total%" 
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+class: middle
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  fig.width = 9,
+  fig.height = 3.5,
+  fig.retina = 3,
+  out.width = "100%",
+  cache = FALSE,
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  hiline = TRUE,
+  fig.align = "center"
+)
+```
+
+```{r eval=FALSE, include=FALSE}
+# devtools::install_github("hadley/emo")
+# devtools::install_github("gadenbuie/xaringanExtra")
+# devtools::install_github("gadenbuie/ermoji")
+```
+
+```{css}
+/* custom.css */
+.left-code {
+  color: #777;
+  width: 38%;
+  height: 92%;
+  float: left;
+}
+.right-plot {
+  width: 60%;
+  float: right;
+  padding-left: 1%;
+}
+```
+
+
+```{r xaringanExtra-clipboard, echo=FALSE}
+xaringanExtra::use_clipboard()
+```
+
+
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#826b37",
+  title_slide_background_color = "#e6ddc8",
+  title_slide_text_color = "#5a513b",
+  inverse_text_color = "#826b37",
+  inverse_header_color = "#826b37",
+  inverse_background_color = "#d1c29e",
+  secondary_color = "#EDBBC8",
+  
+  header_font_google = google_font("Josefin Slab", "600"),
+  text_font_google   = google_font("Work Sans", "300", "300i"),
+  code_font_google   = google_font("Fira Code"),
+  base_font_size = "25px"
+)
+```
+
+
+```{r xaringan-logo, echo=FALSE}
+xaringanExtra::use_logo(
+  image_url = "img/logo-python.png", 
+    link_url = "https://2021.pythonbrasil.org.br/"
+)
+```
+
+
+
+
+---
+
+
+### R: Comunidades, eventos, pacotes, livros..
+<center>
+
+<a href='https://education.rstudio.com/trainers/'>  <img src='img/Hex/CertifiedRstudioTrainer.png' width="150px"></a>
+
+
+<a href='https://rladies.org/'>  <img src='img/Hex/1hexlogorladies.jpeg' width="150px"></a>
+
+<a href='https://curso-r.com/'>  <img src="img/Hex/curso-r-azul.jpg" width="150px"></a>
+
+<a href='https://livro.curso-r.com/'>  <img src='https://curso-r.com/images/produtos/hex-livro.png' width="150px"></a>
+
+
+
+<a href='https://saopaulo2019.satrdays.org/'>  <img src='img/Hex/2satrdaysp.png' width="150px"></a>
+<a href='https://latin-r.com/'>  <img src='img/Hex/4LatinR_hex_violeta-cut.jpg' width="150px"></a>
+<a href='https://carpentries.org/'>  <img src='img/Hex/carpentries.png' width="150px"> </a>
+<a href='https://user2021.r-project.org/'>  <img src='https://user2021.r-project.org/img/artwork/user-logo-color.png' width="150px"> </a>
+
+<a href='https://cienciadedatos.github.io/dados/'>  <img src='https://cienciadedatos.github.io/dados/reference/figures/dados-hex.png' width="150px"></a>
+<a href='https://beatrizmilz.github.io/mananciais/'>  <img src='https://beatrizmilz.github.io/mananciais/reference/figures/hexlogo.png' width="150px"></a>
+</center>
+
+
+---
+class: inverse, middle, center
+
+# slide de transição
+
+
+
+---
+class: center
+
+## Muito obrigada!
+
+.pull-left[
+
+```{r echo=FALSE, fig.align='center', out.width="50%"}
+knitr::include_graphics("https://media.giphy.com/media/M9NbzZjAcxq9jS9LZJ/giphy.gif")
+```
+
+
+Slides criados usando os pacotes em R  📦 :
+
+[**xaringan**](https://github.com/yihui/xaringan)<br>
+[gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
+
+O chakra vem da biblioteca javascript [remark.js](https://remarkjs.com), e os pacotes  [**knitr**](http://yihui.name/knitr), e [R Markdown](https://rmarkdown.rstudio.com).
+]
+
+.pull-right[
+
+<center>
+<img src="https://avatars.githubusercontent.com/u/42153618?v=4" alt="Avatar" style="border-radius: 50%; max-width: 50%; "></center>
+
+<i class="fas fa-home"></i> [beatrizmilz.com](https://beatrizmilz.com)
+
+<i class="fab fa-twitter"></i> [@BeaMilz](https://twitter.com/BeaMilz)
+
+<!-- <i class="far fa-envelope"></i> [milz.bea@gmail.com](mailto:milz.bea@gmail.com) -->
+]
+
+
+
+<!-- inicio academic icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<!-- final academic icons -->
+
+ 
+<!-- inicio font awesome -->
+<script src="https://kit.fontawesome.com/1f72d6921a.js" crossorigin="anonymous"></script>
+
+<!-- final font awesome -->
