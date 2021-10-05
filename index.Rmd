@@ -52,6 +52,10 @@ knitr::opts_chunk$set(
   float: right;
   padding-left: 1%;
 }
+
+a, a > code {
+    text-decoration: underline;
+}
 ```
 
 
@@ -131,8 +135,8 @@ Essa palestra tem como objetivo apresentar um conteúdo introdutório e será mo
 
 <a href='https://saopaulo2019.satrdays.org/'>  <img src='img/Hex/2satrdaysp.png' width="150px"></a>
 <a href='https://latin-r.com/'>  <img src='img/Hex/4LatinR_hex_violeta-cut.jpg' width="150px"></a>
-<a href='https://carpentries.org/'>  <img src='img/Hex/carpentries.png' width="150px"> </a>
-<a href='https://user2021.r-project.org/'>  <img src='https://user2021.r-project.org/img/artwork/user-logo-color.png' width="150px"> </a>
+<a href='https://carpentries.org/'>  <img src='img/Hex/carpentries.png' width="150px"></a>
+<a href='https://user2021.r-project.org/'>  <img src='https://user2021.r-project.org/img/artwork/user-logo-color.png' width="150px"></a>
 
 <a href='https://cienciadedatos.github.io/dados/'>  <img src='https://cienciadedatos.github.io/dados/reference/figures/dados-hex.png' width="150px"></a>
 <a href='https://beatrizmilz.github.io/mananciais/'>  <img src='https://beatrizmilz.github.io/mananciais/reference/figures/hexlogo.png' width="150px"></a>
@@ -142,13 +146,210 @@ Essa palestra tem como objetivo apresentar um conteúdo introdutório e será mo
 
 ## Alinhamentos de expectativas
 
-- Conteúdo introdutório
+- Conteúdo introdutório!
 
-- 
+- Foco em análise de dados
+
+- Falaremos um pouco de R também! :)
+
 
 
 ---
 class: inverse, middle, center
+
+
+# Conceitos importates!
+
+## Sobre R e a comunidade :)
+
+---
+
+## R
+
+.pull-left[
+- Linguagem de programação de código aberto
+
+- Criada em 1993, no departamento de Estatística da Universidade de Auckland, Nova Zelândia.
+
+- A comunidade da linguagem R é muito presente!
+
+- Muito usada por pessoas da área estatística, em pesquisas científicas, para analisar dados, etc.
+
+- É mantido pela [R Foundation](https://www.r-project.org/foundation/), uma organização sem fins lucrativos.
+]
+
+.pull-right[
+```{r, out.width="65%"}
+knitr::include_graphics("img/r_logo.png")
+```
+
+Descrição: Logo da linguagem de programação R.
+
+
+]
+
+
+
+
+---
+
+## RStudio
+
+
+.pull-left[
+
+- Mais conhecido pela IDE RStudio
+
+- É uma companhia criada em 2009
+
+- Tem uma grande equipe de pessoas que trabalham no desenvolvimento de pacotes em R
+
+- Organizam a [RStudio Conference](https://www.rstudio.com/conference/) (em 2020 com mais de 2200 participantes)
+
+- É muito próxima da comunidade
+
+
+
+
+
+]
+
+.pull-right[
+```{r, out.width="65%"}
+knitr::include_graphics("img/rstudio.png")
+```
+
+Descrição: Logo da RStudio.
+
+
+- É a empresa privada mais importante no contexto da linguagem de programação R do mundo (**minha opinião**)
+
+
+
+- [Saiba mais nesse link](https://www.rstudio.com/about/)
+
+]
+
+
+
+
+---
+class: middle
+
+
+## Hadley Wickham
+
+
+
+.pull-left[
+
+- Página pessoal: http://hadley.nz/
+
+- Cientista chefe na [RStudio](https://www.rstudio.com/)
+
+- Criador do principal pacote de criar gráficos em R: [`{ggplot2}`](https://ggplot2.tidyverse.org/) e de muitos outros pacotes!
+
+- Livros importantes:
+
+  - [R for Data Science](https://r4ds.had.co.nz/) - [versão em espanhol](https://es.r4ds.hadley.nz/)
+  
+  - [R packages](https://r-pkgs.org/)
+  
+- Paper importante: 2014 sobre  [Tidy Data](https://www.jstatsoft.org/article/view/v059i10) - Journal of Statistical Software
+
+
+]
+
+.pull-right[
+
+```{r, out.width="65%"}
+knitr::include_graphics("img/hadley-glamour.jpeg")
+```
+
+
+Fonte: [Criado por Will Chase](https://twitter.com/W_R_Chase/status/1155212225621221376?s=20)
+]
+
+
+
+
+---
+
+## Ciclo da ciência de dados
+
+
+```{r, out.width="65%"}
+knitr::include_graphics("img/environmental-data-science-r4ds-general.png")
+```
+
+
+Fonte: Conceito do ciclo de ciência de dados apresentado por [Hadley Wickham no livro R for Data Science](https://r4ds.had.co.nz/introduction.html), ilustração por [Allison Horst](https://github.com/allisonhorst).
+
+
+---
+
+## Ciclo da ciência de dados
+
+
+```{r, out.width="60%"}
+knitr::include_graphics("img/ciclo-ciencia-de-dados.png")
+```
+
+
+Fonte: Conceito do ciclo de ciência de dados apresentado por [Hadley Wickham no livro R for Data Science](https://r4ds.had.co.nz/introduction.html), figura elaborada pela equipe da [Curso-R](https://curso-r.com/).
+
+
+
+---
+
+## Tidyverse
+
+
+.pull-left[
+
+
+```{r, out.width="70%"}
+knitr::include_graphics("img/tidyverse-logo.png")
+```
+
+
+Fonte: logo do pacote [Tidyverse](https://www.tidyverse.org/).
+
+]
+
+.pull-right[
+
+
+```{r, out.width="80%"}
+knitr::include_graphics("img/tidyverse_celestial.png")
+```
+
+
+Fonte: ilustração por [Allison Horst](https://github.com/allisonhorst).
+
+]
+
+
+
+
+
+---
+
+## Ciclo da ciência de dados com R
+
+
+```{r, out.width="60%"}
+knitr::include_graphics("img/ciclo-ciencia-de-dados-pacotes.png")
+```
+
+
+Fonte: Conceito do ciclo de ciência de dados apresentado por [Hadley Wickham no livro R for Data Science](https://r4ds.had.co.nz/introduction.html), figura elaborada pela equipe da [Curso-R](https://curso-r.com/).
+
+
+
+---
+class: inverse, middle, center
+
 
 # Contextualização
 
@@ -178,18 +379,90 @@ Descrição: Meme do Willy Wonka sarcástico, e a legenda diz "Sim, eu adoraria 
 
 Fonte do meme: [esse libk](https://makeameme.org/meme/yes-i-would-5b8a0bceb6)
 
+
 ---
 
-colocar outra imagem/meme sobre a uniao
+## Não é uma batalha :)
+
+.pull-left[
+> Tradução: Geralmente, muitas pessoas falam sobre R versus Python como se fosse uma guerra onde R ou Python fossem vencer. Eu acho que isso não é interessante pois não é realmente uma batalha. Essas coisas existem indepentendemente e são ambas incríveis de formas diferentes. <br> -- **Hadley Wickham**
+
+
+]
+
+.pull-right[
+
+
+```{r}
+knitr::include_graphics("img/hadley.jpeg")
+```
+
+Descrição: Foto do Hadley Wickham
+
+Fonte: [Esse post no blog da RStudio](https://blog.rstudio.com/2019/12/17/r-vs-python-what-s-the-best-for-language-for-data-science/)
+
+]
+
+---
+class: middle
+
+## > O foco do "R ou Python?" arrisca perder as vantagens que utilizar as duas linguagens pode trazer para cientistas de dados e times de ciência de dados.
+
+> -- Fonte: [Lou Bajuk, nesse post no blog da RStudio](https://blog.rstudio.com/2019/12/17/r-vs-python-what-s-the-best-for-language-for-data-science/)
+
+---
+
+## Exemplos muito legais!
+
+.pull-left[
+
+### R
+
+```{r, out.width="50%", fig.align='default'}
+knitr::include_graphics(c("img/hex-rmarkdown.png", "img/hex-shiny.jpeg"))
+```
+
+- [R Markdown](https://rmarkdown.rstudio.com/) e [Shiny](https://shiny.rstudio.com/)
+
+]
+
+.pull-right[
+
+### Python
+
+```{r, out.width="45%"}
+knitr::include_graphics("img/scrapy.png")
+```
+
+ - [Scrapy](https://scrapy.org/)
+]
+
+
+???
+> voce pode falar bem de uma linguagem sem falar mal de outra :) jt
+
 
 
 ---
 class: inverse, middle, center
 
-# Pacote reticulate
+# Pacote reticulate + RStudio
 
 ---
-- importante ter um slide explicando a importancia da rstudio
+
+## RStudio: Uma casa única para R e Python
+
+```{r, out.width="70%"}
+knitr::include_graphics("img/rstudioandpython-15.png")
+```
+
+
+[Fonte da imagem](https://blog.rstudio.com/2021/01/13/one-home-for-r-and-python/)
+
+---
+
+ideia juli: shared session
+
 
 ---
 ## Dicas
@@ -208,6 +481,23 @@ class: inverse, middle, center
 ## Links úteis e referências
 
 - Texto em blog: [R vs. Python: What's the best language for Data Science?](https://blog.rstudio.com/2019/12/17/r-vs-python-what-s-the-best-for-language-for-data-science/)
+
+
+- [R and Python - RStudio](https://www.rstudio.com/solutions/r-and-python/)
+
+
+---
+## Agradecimentos
+
+- Escola de dados - curso de Python para inovação cívica
+
+- Ana Dulce - https://twitter.com/4naDulceP
+
+- Angélica Custódio
+
+- Julio Trecenti
+
+
 
 
 ---
