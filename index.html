@@ -9,6 +9,7 @@
     <link href="index_files/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
     <script src="index_files/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
     <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="index_files/fitvids/fitvids.min.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -310,7 +311,7 @@ Fonte: logo do pacote [Tidyverse](https://www.tidyverse.org/).
 &lt;img src="img/tidyverse_celestial.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
-Fonte: ilustração por [Allison Horst](https://github.com/allisonhorst).
+Fonte: Ilustração por [Allison Horst](https://github.com/allisonhorst).
 
 ]
 
@@ -419,11 +420,11 @@ class: middle
 ---
 class: inverse, middle, center
 
-# Pacote reticulate + RStudio
+# Pacote reticulate + IDE RStudio
 
 ---
 
-## RStudio: Uma casa única para R e Python
+## IDE RStudio: Uma casa única para R e Python
 
 &lt;img src="img/rstudioandpython-15.png" width="70%" style="display: block; margin: auto;" /&gt;
 
@@ -432,11 +433,47 @@ class: inverse, middle, center
 
 ---
 
-ideia juli: shared session
+## Pacote Reticulate 
 
+.pull-left[
+
+- É um pacote criado e mantido pela [RStudio](https://www.rstudio.com/)
+
+- [Repositório no GitHub](https://github.com/rstudio/reticulate/) e [site do pacote](https://rstudio.github.io/reticulate/)
+
+
+- O pacote reticulate fornece um conjunto de ferramentas para interoperabilidade entre Python e R.
+
+
+
+]
+
+.pull-right[
+
+
+
+&lt;img src="img/reticulated_python.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
 
 ---
-## Dicas
+
+## Documentação
+
+
+O pacote reticulate inclui recursos para:
+
+
+- Chamar Python do R de várias maneiras, incluindo **R Markdown**, criação de scripts Python, importação de módulos Python e uso de Python interativamente em uma sessão R.
+
+
+- Tradução entre objetos R e Python (por exemplo, entre data frames R e Pandas, ou entre matrizes R e arrays do NumPy).
+
+- Vinculação flexível para diferentes versões do Python, incluindo ambientes virtuais e ambientes Conda.
+
+- Reticulate incorpora uma sessão Python em sua sessão R, permitindo interoperabilidade contínua e de alto desempenho. Se você é um desenvolvedor R que usa Python para alguns de seus trabalhos ou um membro da equipe de ciência de dados que usa ambas as linguagens, o reticulate pode agilizar drasticamente o seu fluxo de trabalho!
+
+Fonte: [Site do pacote](https://rstudio.github.io/reticulate/)
 
 
 ---
@@ -445,6 +482,147 @@ class: inverse, middle, center
 # R Markdown
 
 ---
+
+
+## Pacote R Markdown
+
+.pull-left[
+- Criado e mantido pela [RStudio](https://rstudio.com/)
+
+- Princípio: arquivos onde escrevemos textos e marcamos com `markdown`, mas também podemos adicionar códigos que são executados.
+
+- Extensão `.Rmd`
+
+- Possibilita a utilização de códigos `R`, `Python`, `Markdown`, `HTML`, `CSS`, `SQL`, e outros em um único arquivo.
+
+- Ideia similar ao Jupiter Notebook.
+
+]
+
+.pull-right[
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/hex-rmarkdown.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Logo: &amp;lt;a href='https://rmarkdown.rstudio.com'&amp;gt;Pacote rmarkdown&amp;lt;/a&amp;gt;&amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="70%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Logo: &lt;a href='https://rmarkdown.rstudio.com'&gt;Pacote rmarkdown&lt;/a&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+]
+
+---
+
+## Pacote R Markdown
+
+- A reprodutibilidade é algo importante para o R Markdown.
+
+-  A comunidade de R, e a equipe da RStudio, desenvolveram outros pacotes que integram bem com R Markdown para  gerar diversos produtos de análise de dados diferentes, com arquivos .Rmd. 
+
+
+## Alguns exemplos:
+
+(apenas alguns mesmo pois tem muita coisa além disso!)
+
+---
+
+### Apresentações com o pacote [xaringan](https://slides.yihui.org/xaringan/)
+
+- Exemplo: Essa apresentação! [E muitas outras que fiz](https://beatrizmilz.com/talk/), como a [abaixo](https://beatrizmilz.github.io/slidesR/xaringan/09-2021-rday.html#1): 
+
+<div class="shareagain" style="min-width:300px;margin:1em auto;max-width:70%;">
+<iframe src="https://beatrizmilz.github.io/slidesR/xaringan/09-2021-rday.html#1" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+
+---
+
+### Livros com o pacote [bookdown](https://bookdown.org/home/)
+
+- Exemplo: [Livro Ciência de Dados em R](https://livro.curso-r.com/) da [Curso-R](https://curso-r.com/)
+
+<div class="shareagain" style="min-width:300px;margin:1em auto;max-width:70%;">
+<iframe src="https://livro.curso-r.com/" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+
+---
+
+### Blogs com o pacote [blogdown](https://pkgs.rstudio.com/blogdown/)
+
+- Exemplo: [meu blog](https://beatrizmilz.com/blog/2021-python-serie/semana-1-parte-1/)
+
+<div class="shareagain" style="min-width:300px;margin:1em auto;max-width:70%;">
+<iframe src="https://beatrizmilz.com/blog/2021-python-serie/semana-1-parte-1/" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+
+
+---
+
+### Blogs com o pacote [blogdown](https://pkgs.rstudio.com/blogdown/)
+
+- Exemplo: [blog da Curso-R](https://blog.curso-r.com/posts/2021-06-23-dnd/)
+
+<div class="shareagain" style="min-width:300px;margin:1em auto;max-width:70%;">
+<iframe src="https://blog.curso-r.com/posts/2021-06-23-dnd/" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+
+---
+
+## Produtos em PDF com o pacote [pagedown](https://github.com/rstudio/pagedown)
+
+
+
+Exemplo: o [relatório](https://abjur.github.io/obsRJRJ/relatorio/obs_rjrj_abj.pdf) do [Observatório da insolvência: Rio de Janeiro](https://abj.org.br/cases/obsrjrj/), feito pela [ABJ](https://abj.org.br/) .footnote[ABJ: Associação Brasileira de Jurimetria]
+
+
+<div class="shareagain" style="min-width:300px;margin:1em auto;max-width:70%;">
+<iframe src="https://abjur.github.io/obsRJRJ/relatorio/obs_rjrj_abj.pdf" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+
+
+---
+
+## Como usar?
+
+- Campos de código, ou **chunks**
+
+`````
+
+`````
+
+---
+
+ideia juli: shared session
+
+
+---
+
+## Dicas gerais
+
+- Use sempre a versão mais recente do [R](https://cran.r-project.org/) e da [IDE RStudio](https://www.rstudio.com/products/rstudio/download/)
+
+- Use a versão do reticulate que está disponível no GitHub (versão em desenvolvimento):
+
+
+```r
+devtools::install_github("rstudio/reticulate")
+```
+
+
+- Ao usar R Markdown, nas opções globais de chunk, adicione a linha destacada abaixo:
+
+
+```r
+knitr::opts_chunk$set(
+*  python = reticulate::eng_python      
+)
+```
+
+
+- O RStudio ainda não oferece suporte para abrir arquivos  `.ipynb` corretamente, porém existe uma função para converter arquivos `.ipynb` em `.Rmd`: [`rmarkdown::convert_ipynb()`](https://rmarkdown.rstudio.com/docs/reference/convert_ipynb.html)
+
+
+
+
 
 
 ---
@@ -460,14 +638,17 @@ class: inverse, middle, center
 ---
 ## Agradecimentos
 
-- Escola de dados - curso de Python para inovação cívica
+- [Escola de Dados - Curso de Python para Inovação Cívica](https://escoladedados.org/courses/python-para-inovacao-civica/)
 
-- Ana Dulce - https://twitter.com/4naDulceP
+- [Ana Dulce](https://twitter.com/4naDulceP) - Organizadora da Python Brasil
 
-- Angélica Custódio
+- [Angélica Custódio](https://twitter.com/angcustodio)
 
-- Julio Trecenti
+- [Julio Trecenti](https://linktr.ee/j.trecenti)
 
+- [Comunidade R-Ladies São Paulo](https://r-ladies-sao-paulo.github.io/RLadiesTheme/)
+
+- [Curso-R](https://curso-r.com/)
 
 
 
