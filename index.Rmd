@@ -625,6 +625,54 @@ class: middle, center, inverse
 
 ---
 
+## Sessão compartilhada: resumo
+
+.pull-left[
+
+### R -> Py
+
+```{r, echo=FALSE}
+library(reticulate)
+```
+
+
+No R:
+
+```{r, echo=TRUE}
+frase <- "R é legal!"
+```
+
+No Python:
+
+```{python, echo=TRUE}
+"Python com " + r.frase
+```
+
+]
+
+.pull-right[
+
+### Py -> R
+
+No Python:
+
+```{python, echo=TRUE}
+outra_frase = "Python é legal!"
+```
+
+No R:
+
+```{r, echo=TRUE}
+paste("R com", py$outra_frase)
+```
+
+
+]
+
+
+
+---
+
 ## Criando um dataframe em R
 
 ```{r echo=TRUE}
