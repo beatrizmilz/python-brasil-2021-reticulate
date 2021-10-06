@@ -78,7 +78,7 @@ top:1em;right:1em;
         setTimeout(addLogo, 100)
       }
     } else {
-      document.querySelectorAll('.remark-slide-content:not(.title-slide):not(.inverse):not(.hide_logo)')
+      document.querySelectorAll('.remark-slide-content:not(.hide-logo)')
         .forEach(function (slide) {
           const logo = document.createElement('a')
           logo.classList = 'xaringan-extra-logo'
@@ -585,14 +585,140 @@ Exemplo: o [relatório](https://abjur.github.io/obsRJRJ/relatorio/obs_rjrj_abj.p
 
 - Campos de código, ou **chunks**
 
-`````
+(PREENCHER)
 
-`````
+
+---
+class: middle, center, inverse
+
+## Sessão compartilhada entre R e Python &lt;br&gt; *(shared session)*
+
+
+
+### R -&gt; Py
 
 ---
 
-ideia juli: shared session
+## Criando um dataframe em R
 
+
+```r
+library(tidyverse)
+library(dados)
+
+lucro_pixar &lt;- pixar_bilheteria %&gt;% 
+  mutate(lucro = bilheteria_mundial - orcamento) %&gt;%
+  arrange(desc(lucro))
+```
+
+---
+
+### Acessando o conteúdo em R
+
+
+```r
+lucro_pixar
+```
+
+```
+## # A tibble: 24 × 6
+##    filme    orcamento bilheteria_eua_c… bilheteria_outr… bilheteria_mund…  lucro
+##    &lt;chr&gt;        &lt;dbl&gt;             &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Os Incr… 200000000         608581744        634223615       1242805359 1.04e9
+##  2 Toy Sto… 200000000         434038008        639356585       1073394593 8.73e8
+##  3 Toy Sto… 200000000         415004880        651964823       1066969703 8.67e8
+##  4 Procura… 200000000         486295561        542275328       1028570889 8.29e8
+##  5 Procura…  94000000         339714978        531300000        871014978 7.77e8
+##  6 Diverti… 175000000         356461711        501149463        857611174 6.83e8
+##  7 Viva - … 175000000         209726015        597356181        807082196 6.32e8
+##  8 Up - Al… 175000000         293004164        442094918        735099082 5.60e8
+##  9 Univers… 200000000         268492764        475066843        743559607 5.44e8
+## 10 Os Incr…  92000000         261441092        370165621        631606713 5.40e8
+## # … with 14 more rows
+```
+
+---
+
+### Acessando o conteúdo em Python 
+
+
+```python
+r.lucro_pixar
+```
+
+```
+##                                   filme  ...         lucro
+## 0                        Os Incríveis 2  ...  1.042805e+09
+## 1                           Toy Story 4  ...  8.733946e+08
+## 2                           Toy Story 3  ...  8.669697e+08
+## 3                       Procurando Dory  ...  8.285709e+08
+## 4                       Procurando Nemo  ...  7.770150e+08
+## 5                        Divertidamente  ...  6.826112e+08
+## 6             Viva - A Vida é Uma Festa  ...  6.320822e+08
+## 7                  Up - Altas Aventuras  ...  5.600991e+08
+## 8                 Universidade Monstros  ...  5.435596e+08
+## 9                          Os Incríveis  ...  5.396067e+08
+## 10                       Monstros S. A.  ...  5.173166e+08
+## 11                          Ratatouille  ...  4.737261e+08
+## 12                          Toy Story 2  ...  4.073748e+08
+## 13                             Carros 2  ...  3.598524e+08
+## 14                              Valente  ...  3.539832e+08
+## 15    Toy Story - Um Mundo de Aventuras  ...  3.435540e+08
+## 16                               Carros  ...  3.419831e+08
+## 17                               WALL-E  ...  3.413119e+08
+## 18                       Vida de Inseto  ...  2.432589e+08
+## 19                             Carros 3  ...  2.089307e+08
+## 20                     O Bom Dinossauro  ...  1.572077e+08
+## 21  Dois Irmãos: Uma Jornada Fantástica  ... -3.304988e+07
+## 22                                 Soul  ... -3.956468e+07
+## 23                                 Luca  ...           NaN
+## 
+## [24 rows x 6 columns]
+```
+
+
+---
+
+### Criando um gráfico em R
+
+
+```r
+lucro_pixar %&gt;%
+  mutate(filme = forcats::fct_reorder(filme, lucro)) %&gt;%
+  ggplot() +
+  geom_col(aes(x = lucro, y = filme, fill = lucro), show.legend = FALSE) +
+  scale_x_continuous(labels = scales::dollar_format()) +
+  theme_light() + labs(x = "Lucro", y = "Filme")
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-27-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+### Criando um gráfico em Python
+
+
+
+```python
+import seaborn as sns
+sns.barplot(x = "lucro", y = "filme", data = r.lucro_pixar)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-28-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+class: middle, center, inverse
+
+## Sessão compartilhada entre R e Python &lt;br&gt; *(shared session)*
+
+
+
+### Py -&gt; R
+
+---
+
+COLOCAR EXEMPLOS
 
 ---
 
@@ -628,6 +754,8 @@ knitr::opts_chunk$set(
 ---
 
 ## Links úteis e referências
+
+- [Cheatsheet do pacote reticulate](https://raw.githubusercontent.com/rstudio/cheatsheets/master/reticulate.pdf)
 
 - Texto em blog: [R vs. Python: What's the best language for Data Science?](https://blog.rstudio.com/2019/12/17/r-vs-python-what-s-the-best-for-language-for-data-science/)
 

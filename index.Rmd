@@ -29,7 +29,8 @@ knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE,
   hiline = TRUE,
-  fig.align = "center"
+  fig.align = "center",
+  python = reticulate::eng_python
 )
 ```
 
@@ -87,7 +88,8 @@ style_duo_accent(
 ```{r xaringan-logo, echo=FALSE}
 xaringanExtra::use_logo(
   image_url = "img/logo-python.png", 
-    link_url = "https://2021.pythonbrasil.org.br/"
+    link_url = "https://2021.pythonbrasil.org.br/",
+  exclude_class = "hide-logo"
 )
 ```
 
@@ -609,16 +611,84 @@ xaringanExtra::embed_xaringan("https://abjur.github.io/obsRJRJ/relatorio/obs_rjr
 
 - Campos de código, ou **chunks**
 
-`````
-```{r}
+(PREENCHER)
 
-```
-`````
+
+---
+class: middle, center, inverse
+
+## Sessão compartilhada entre R e Python <br> *(shared session)*
+
+
+
+### R -> Py
 
 ---
 
-ideia juli: shared session
+## Criando um dataframe em R
 
+```{r echo=TRUE}
+library(tidyverse)
+library(dados)
+
+lucro_pixar <- pixar_bilheteria %>% 
+  mutate(lucro = bilheteria_mundial - orcamento) %>%
+  arrange(desc(lucro))
+```
+
+---
+
+### Acessando o conteúdo em R
+
+```{r echo=TRUE}
+lucro_pixar
+```
+
+---
+
+### Acessando o conteúdo em Python 
+
+```{python echo=TRUE}
+r.lucro_pixar
+```
+
+
+---
+
+### Criando um gráfico em R
+
+```{r echo=TRUE, out.width="70%"}
+lucro_pixar %>%
+  mutate(filme = forcats::fct_reorder(filme, lucro)) %>%
+  ggplot() +
+  geom_col(aes(x = lucro, y = filme, fill = lucro), show.legend = FALSE) +
+  scale_x_continuous(labels = scales::dollar_format()) +
+  theme_light() + labs(x = "Lucro", y = "Filme")
+```
+
+---
+
+
+### Criando um gráfico em Python
+
+
+```{python echo=TRUE, out.width="70%"}
+import seaborn as sns
+sns.barplot(x = "lucro", y = "filme", data = r.lucro_pixar)
+```
+
+---
+class: middle, center, inverse
+
+## Sessão compartilhada entre R e Python <br> *(shared session)*
+
+
+
+### Py -> R
+
+---
+
+COLOCAR EXEMPLOS
 
 ---
 
@@ -652,6 +722,8 @@ knitr::opts_chunk$set(
 ---
 
 ## Links úteis e referências
+
+- [Cheatsheet do pacote reticulate](https://raw.githubusercontent.com/rstudio/cheatsheets/master/reticulate.pdf)
 
 - Texto em blog: [R vs. Python: What's the best language for Data Science?](https://blog.rstudio.com/2019/12/17/r-vs-python-what-s-the-best-for-language-for-data-science/)
 
