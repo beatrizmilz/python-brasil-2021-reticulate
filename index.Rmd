@@ -640,6 +640,8 @@ lucro_pixar <- pixar_bilheteria %>%
 
 ### Acessando o conteúdo em R
 
+Em um chunk em R, é só usar o nome do objeto:
+
 ```{r echo=TRUE}
 lucro_pixar
 ```
@@ -647,6 +649,8 @@ lucro_pixar
 ---
 
 ### Acessando o conteúdo em Python 
+
+Em um chunk em Python, usar `r.NOME_DO_OBJETO`:
 
 ```{python echo=TRUE}
 r.lucro_pixar
