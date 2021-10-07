@@ -578,14 +578,131 @@ Exemplo: o [relatório](https://abjur.github.io/obsRJRJ/relatorio/obs_rjrj_abj.p
 <script>fitvids('.shareagain', {players: 'iframe'});</script>
 </div>
 
+---
+class: inverse, middle, center
+
+
+## Usando reticulate
+
+&lt;img src="img/reticulated_python.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
 
 ---
+
+### Algumas configurações
+
+
+```r
+# Código R
+
+# Carregar o pacote lubridate
+library(reticulate)
+
+# Instalar o python
+reticulate::install_python(version = "3.9.0")
+
+# &gt; Installed Python-3.9.0 to /Users/beatrizmilz/.pyenv/versions/3.9.0
+
+# &gt; [1] "/Users/beatrizmilz/.pyenv/versions/3.9.0/bin/python3.9"
+```
+
+---
+
+### Ver as configurações utilizadas
+
+
+```r
+reticulate::py_config()
+```
+
+```
+## python:         /Users/beatrizmilz/GitHub/python-brasil-2021-reticulate/bin/python
+## libpython:      /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/config-3.9-darwin/libpython3.9.dylib
+## pythonhome:     /Users/beatrizmilz/GitHub/python-brasil-2021-reticulate:/Users/beatrizmilz/GitHub/python-brasil-2021-reticulate
+## version:        3.9.4 (v3.9.4:1f2e3088f3, Apr  4 2021, 12:32:44)  [Clang 6.0 (clang-600.0.57)]
+## numpy:          /Users/beatrizmilz/GitHub/python-brasil-2021-reticulate/lib/python3.9/site-packages/numpy
+## numpy_version:  1.21.2
+## 
+## NOTE: Python version was forced by RETICULATE_PYTHON
+```
+
+---
+
+### Instalar bibliotecas
+
+
+
+```r
+# Código R
+
+
+# Instalar o pandas
+reticulate::py_install("pandas")
+
+# Instalar o seaborn
+reticulate::py_install("seaborn")
+```
+
+---
+
+
+
+.pull-left[
 
 ## Como usar?
 
 - Campos de código, ou **chunks**
 
-(PREENCHER)
+
+````markdown
+```{r}
+# seu código em R aqui
+```
+
+````
+
+````markdown
+```{python}
+# seu código em python aqui
+```
+
+````
+
+]
+
+
+
+.pull-right[
+
+Ex:
+
+- Como é adicionado no arquivo `.Rmd`:
+
+````markdown
+```{python}
+"Olá," + "Mundo!"
+```
+````
+
+- Como aparecerá no arquivo final: 
+
+
+```python
+"Olá, " + "Mundo!"
+```
+
+```
+## 'Olá, Mundo!'
+```
+
+
+]
+
+
+
+
+
 
 
 ---
@@ -593,136 +710,145 @@ class: middle, center, inverse
 
 ## Sessão compartilhada entre R e Python &lt;br&gt; *(shared session)*
 
-
-
-### R -&gt; Py
-
 ---
+
+### Exemplo de uso
+
+
+```python
+# Código Python
+import pandas as pd
+
+lucro_pixar = pd.read_csv('dados/lucro_pixar.csv', sep = ';')
+
+lucro_pixar.info()
+```
+
+```
+## &lt;class 'pandas.core.frame.DataFrame'&gt;
+## RangeIndex: 24 entries, 0 to 23
+## Data columns (total 6 columns):
+##  #   Column                    Non-Null Count  Dtype  
+## ---  ------                    --------------  -----  
+##  0   filme                     24 non-null     object 
+##  1   orcamento                 23 non-null     object 
+##  2   bilheteria_eua_canada     22 non-null     float64
+##  3   bilheteria_outros_paises  23 non-null     float64
+##  4   bilheteria_mundial        23 non-null     float64
+##  5   lucro                     23 non-null     float64
+## dtypes: float64(4), object(2)
+## memory usage: 1.2+ KB
+```
+
+
+???
 
 ## Criando um dataframe em R
 
 
-```r
-library(tidyverse)
-library(dados)
-
-lucro_pixar &lt;- pixar_bilheteria %&gt;% 
-  mutate(lucro = bilheteria_mundial - orcamento) %&gt;%
-  arrange(desc(lucro))
-```
-
----
-
-### Acessando o conteúdo em R
-
-Em um chunk em R, é só usar o nome do objeto:
-
-
-```r
-lucro_pixar
-```
-
-```
-## # A tibble: 24 × 6
-##    filme    orcamento bilheteria_eua_c… bilheteria_outr… bilheteria_mund…  lucro
-##    &lt;chr&gt;        &lt;dbl&gt;             &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Os Incr… 200000000         608581744        634223615       1242805359 1.04e9
-##  2 Toy Sto… 200000000         434038008        639356585       1073394593 8.73e8
-##  3 Toy Sto… 200000000         415004880        651964823       1066969703 8.67e8
-##  4 Procura… 200000000         486295561        542275328       1028570889 8.29e8
-##  5 Procura…  94000000         339714978        531300000        871014978 7.77e8
-##  6 Diverti… 175000000         356461711        501149463        857611174 6.83e8
-##  7 Viva - … 175000000         209726015        597356181        807082196 6.32e8
-##  8 Up - Al… 175000000         293004164        442094918        735099082 5.60e8
-##  9 Univers… 200000000         268492764        475066843        743559607 5.44e8
-## 10 Os Incr…  92000000         261441092        370165621        631606713 5.40e8
-## # … with 14 more rows
-```
-
----
-
-### Acessando o conteúdo em Python 
-
-Em um chunk em Python, usar `r.NOME_DO_OBJETO`:
-
-
-```python
-r.lucro_pixar
-```
-
-```
-##                                   filme  ...         lucro
-## 0                        Os Incríveis 2  ...  1.042805e+09
-## 1                           Toy Story 4  ...  8.733946e+08
-## 2                           Toy Story 3  ...  8.669697e+08
-## 3                       Procurando Dory  ...  8.285709e+08
-## 4                       Procurando Nemo  ...  7.770150e+08
-## 5                        Divertidamente  ...  6.826112e+08
-## 6             Viva - A Vida é Uma Festa  ...  6.320822e+08
-## 7                  Up - Altas Aventuras  ...  5.600991e+08
-## 8                 Universidade Monstros  ...  5.435596e+08
-## 9                          Os Incríveis  ...  5.396067e+08
-## 10                       Monstros S. A.  ...  5.173166e+08
-## 11                          Ratatouille  ...  4.737261e+08
-## 12                          Toy Story 2  ...  4.073748e+08
-## 13                             Carros 2  ...  3.598524e+08
-## 14                              Valente  ...  3.539832e+08
-## 15    Toy Story - Um Mundo de Aventuras  ...  3.435540e+08
-## 16                               Carros  ...  3.419831e+08
-## 17                               WALL-E  ...  3.413119e+08
-## 18                       Vida de Inseto  ...  2.432589e+08
-## 19                             Carros 3  ...  2.089307e+08
-## 20                     O Bom Dinossauro  ...  1.572077e+08
-## 21  Dois Irmãos: Uma Jornada Fantástica  ... -3.304988e+07
-## 22                                 Soul  ... -3.956468e+07
-## 23                                 Luca  ...           NaN
-## 
-## [24 rows x 6 columns]
-```
 
 
 ---
-
-### Criando um gráfico em R
-
-
-```r
-lucro_pixar %&gt;%
-  mutate(filme = forcats::fct_reorder(filme, lucro)) %&gt;%
-  ggplot() +
-  geom_col(aes(x = lucro, y = filme, fill = lucro), show.legend = FALSE) +
-  scale_x_continuous(labels = scales::dollar_format()) +
-  theme_light() + labs(x = "Lucro", y = "Filme")
-```
-
-&lt;img src="index_files/figure-html/graficoR-1.png" width="70%" style="display: block; margin: auto;" /&gt;
-
----
-
 
 ### Criando um gráfico em Python
 
+- Claramente preciso aprimorar minhas habilidades com seaborn...
 
 
 ```python
 import seaborn as sns
-sns.barplot(x = "lucro", y = "filme", data = r.lucro_pixar)
+sns.barplot(x = "lucro", y = "filme", data = lucro_pixar)
 ```
 
 &lt;img src="index_files/figure-html/graficoPY-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-class: middle, center, inverse
-
-## Sessão compartilhada entre R e Python &lt;br&gt; *(shared session)*
 
 
+### Criando um gráfico em R
 
-### Py -&gt; R
+- Minhas habilidades são melhores com ggplot2 :D
+
+- Acessando o conteúdo em R: Em um chunk em R, podemos usar `py$` + o nome do objeto:  `py$lucro_pixar`
+
+
+
+```r
+library(tidyverse)
+
+py$lucro_pixar %&gt;%
+  tidyr::drop_na(lucro) %&gt;% 
+  mutate(filme = forcats::fct_reorder(filme, lucro)) %&gt;%
+  ggplot() +
+  geom_col(aes(x = lucro, y = filme, fill = lucro), show.legend = FALSE) +
+  scale_x_continuous(labels = scales::dollar_format()) +
+  scale_fill_viridis_c() +
+  theme_light() + 
+  labs(x = "Lucro", y = "Filmes")
+```
+
+
+---
+class: middle, center
+
+![](index_files/figure-html/graficoR-1.png)
+
 
 ---
 
-COLOCAR EXEMPLOS
+## Sessão compartilhada: resumo
+
+.pull-left[
+
+### R -&gt; Py
+
+
+
+
+No R:
+
+
+```r
+frase &lt;- "R é legal!"
+```
+
+No Python:
+
+
+```python
+"Python com " + r.frase
+```
+
+```
+## 'Python com R é legal!'
+```
+
+]
+
+.pull-right[
+
+### Py -&gt; R
+
+No Python:
+
+
+```python
+outra_frase = "Python é legal!"
+```
+
+No R:
+
+
+```r
+paste("R com", py$outra_frase)
+```
+
+```
+## [1] "R com Python é legal!"
+```
+
+
+]
 
 ---
 
@@ -738,13 +864,11 @@ devtools::install_github("rstudio/reticulate")
 ```
 
 
-- Ao usar R Markdown, nas opções globais de chunk, adicione a linha destacada abaixo:
+- Ao usar R Markdown, adicione a linha destacada abaixo:
 
 
 ```r
-knitr::opts_chunk$set(
-*  python = reticulate::eng_python      
-)
+*  knitr::knit_engines$set(python = reticulate::eng_python)      
 ```
 
 
@@ -777,6 +901,8 @@ knitr::opts_chunk$set(
 - [Angélica Custódio](https://twitter.com/angcustodio)
 
 - [Julio Trecenti](https://linktr.ee/j.trecenti)
+
+- [Fernando Corrêa](https://twitter.com/Azeloc)
 
 - [Comunidade R-Ladies São Paulo](https://r-ladies-sao-paulo.github.io/RLadiesTheme/)
 

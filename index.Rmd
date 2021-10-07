@@ -24,14 +24,22 @@ knitr::opts_chunk$set(
   fig.height = 3.5,
   fig.retina = 3,
   out.width = "100%",
-  cache = FALSE,
+  cache = TRUE,
   echo = FALSE,
   message = FALSE,
   warning = FALSE,
   hiline = TRUE,
-  fig.align = "center",
-  python = reticulate::eng_python
+  fig.align = "center"
 )
+
+library(reticulate)
+
+# reticulate::use_python('...", required = TRUE)
+# reticulate::use_virtualenv()
+# reticulate::py_config()
+
+knitr::knit_engines$set(python = reticulate::eng_python)
+
 ```
 
 ```{r eval=FALSE, include=FALSE}
@@ -62,6 +70,7 @@ a, a > code {
 
 ```{r xaringanExtra-clipboard, echo=FALSE}
 xaringanExtra::use_clipboard()
+
 ```
 
 
@@ -604,14 +613,114 @@ Exemplo: o [relatório](https://abjur.github.io/obsRJRJ/relatorio/obs_rjrj_abj.p
 xaringanExtra::embed_xaringan("https://abjur.github.io/obsRJRJ/relatorio/obs_rjrj_abj.pdf", max_width = "70%")
 ```
 
+---
+class: inverse, middle, center
+
+
+## Usando reticulate
+
+```{r, out.width="50%"}
+knitr::include_graphics("img/reticulated_python.png")
+```
+
+
 
 ---
+
+### Algumas configurações
+
+```{r echo = TRUE, eval=FALSE, include=TRUE}
+# Código R
+
+# Carregar o pacote lubridate
+library(reticulate)
+
+# Instalar o python
+reticulate::install_python(version = "3.9.0")
+
+# > Installed Python-3.9.0 to /Users/beatrizmilz/.pyenv/versions/3.9.0
+
+# > [1] "/Users/beatrizmilz/.pyenv/versions/3.9.0/bin/python3.9"
+```
+
+---
+
+### Ver as configurações utilizadas
+
+```{r echo=TRUE}
+reticulate::py_config()
+```
+
+---
+
+### Instalar bibliotecas
+
+
+```{r echo = TRUE, eval=FALSE, include=TRUE}
+# Código R
+
+
+# Instalar o pandas
+reticulate::py_install("pandas")
+
+# Instalar o seaborn
+reticulate::py_install("seaborn")
+```
+
+---
+
+
+
+.pull-left[
 
 ## Como usar?
 
 - Campos de código, ou **chunks**
 
-(PREENCHER)
+
+````markdown
+`r ''````{r}
+# seu código em R aqui
+`r ''````
+
+````
+
+````markdown
+`r ''````{python}
+# seu código em python aqui
+`r ''````
+
+````
+
+]
+
+
+
+.pull-right[
+
+Ex:
+
+- Como é adicionado no arquivo `.Rmd`:
+
+````markdown
+`r ''````{python}
+"Olá," + "Mundo!"
+`r ''````
+````
+
+- Como aparecerá no arquivo final: 
+
+```{python echo=TRUE}
+"Olá, " + "Mundo!"
+```
+
+
+]
+
+
+
+
+
 
 
 ---
@@ -619,9 +728,77 @@ class: middle, center, inverse
 
 ## Sessão compartilhada entre R e Python <br> *(shared session)*
 
+---
+
+### Exemplo de uso
+
+```{python echo=TRUE}
+# Código Python
+import pandas as pd
+
+lucro_pixar = pd.read_csv('dados/lucro_pixar.csv', sep = ';')
+
+lucro_pixar.info()
+```
 
 
-### R -> Py
+???
+
+## Criando um dataframe em R
+
+```{r eval=FALSE, include=FALSE}
+library(tidyverse)
+library(dados)
+
+lucro_pixar <- pixar_bilheteria %>% 
+  mutate(lucro = bilheteria_mundial - orcamento) %>%
+  arrange(desc(lucro))
+
+lucro_pixar %>% readr::write_csv2(file = "dados/lucro_pixar.csv")
+```
+
+
+---
+
+### Criando um gráfico em Python
+
+- Claramente preciso aprimorar minhas habilidades com seaborn...
+
+```{python graficoPY, echo=TRUE, out.width="70%"}
+import seaborn as sns
+sns.barplot(x = "lucro", y = "filme", data = lucro_pixar)
+```
+
+---
+
+
+### Criando um gráfico em R
+
+- Minhas habilidades são melhores com ggplot2 :D
+
+- Acessando o conteúdo em R: Em um chunk em R, podemos usar `py$` + o nome do objeto:  `py$lucro_pixar`
+
+
+```{r graficoR, echo = TRUE, eval=FALSE, include=TRUE, fig.show="hide", cache=FALSE,  out.width="100%"}
+library(tidyverse)
+
+py$lucro_pixar %>%
+  tidyr::drop_na(lucro) %>% 
+  mutate(filme = forcats::fct_reorder(filme, lucro)) %>%
+  ggplot() +
+  geom_col(aes(x = lucro, y = filme, fill = lucro), show.legend = FALSE) +
+  scale_x_continuous(labels = scales::dollar_format()) +
+  scale_fill_viridis_c() +
+  theme_light() + 
+  labs(x = "Lucro", y = "Filmes")
+```
+
+
+---
+class: middle, center
+
+![](`r knitr::fig_chunk("graficoR", "png")`)
+
 
 ---
 
@@ -669,79 +846,6 @@ paste("R com", py$outra_frase)
 
 ]
 
-
-
----
-
-## Criando um dataframe em R
-
-```{r echo=TRUE}
-library(tidyverse)
-library(dados)
-
-lucro_pixar <- pixar_bilheteria %>% 
-  mutate(lucro = bilheteria_mundial - orcamento) %>%
-  arrange(desc(lucro))
-```
-
----
-
-### Acessando o conteúdo em R
-
-Em um chunk em R, é só usar o nome do objeto:
-
-```{r echo=TRUE}
-lucro_pixar
-```
-
----
-
-### Acessando o conteúdo em Python 
-
-Em um chunk em Python, usar `r.NOME_DO_OBJETO`:
-
-```{python echo=TRUE}
-r.lucro_pixar
-```
-
-
----
-
-### Criando um gráfico em R
-
-```{r graficoR, echo=TRUE, out.width="70%"}
-lucro_pixar %>%
-  mutate(filme = forcats::fct_reorder(filme, lucro)) %>%
-  ggplot() +
-  geom_col(aes(x = lucro, y = filme, fill = lucro), show.legend = FALSE) +
-  scale_x_continuous(labels = scales::dollar_format()) +
-  theme_light() + labs(x = "Lucro", y = "Filme")
-```
-
----
-
-
-### Criando um gráfico em Python
-
-
-```{python graficoPY, echo=TRUE, out.width="70%"}
-import seaborn as sns
-sns.barplot(x = "lucro", y = "filme", data = r.lucro_pixar)
-```
-
----
-class: middle, center, inverse
-
-## Sessão compartilhada entre R e Python <br> *(shared session)*
-
-
-
-### Py -> R
-
----
-
-COLOCAR EXEMPLOS
-
 ---
 
 ## Dicas gerais
@@ -755,12 +859,10 @@ devtools::install_github("rstudio/reticulate")
 ```
 
 
-- Ao usar R Markdown, nas opções globais de chunk, adicione a linha destacada abaixo:
+- Ao usar R Markdown, adicione a linha destacada abaixo:
 
 ```{r echo = TRUE, eval=FALSE, include=TRUE}
-knitr::opts_chunk$set(
-{{  python = reticulate::eng_python      }}
-)
+{{  knitr::knit_engines$set(python = reticulate::eng_python)      }}
 ```
 
 
@@ -793,6 +895,8 @@ knitr::opts_chunk$set(
 - [Angélica Custódio](https://twitter.com/angcustodio)
 
 - [Julio Trecenti](https://linktr.ee/j.trecenti)
+
+- [Fernando Corrêa](https://twitter.com/Azeloc)
 
 - [Comunidade R-Ladies São Paulo](https://r-ladies-sao-paulo.github.io/RLadiesTheme/)
 
