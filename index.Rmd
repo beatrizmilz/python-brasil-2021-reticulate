@@ -1,5 +1,5 @@
 ---
-title: "Fazendo amizade com a Phyton reticulada"
+title: "Fazendo amizade com a Python reticulada"
 subtitle: "Introdução ao uso de Python e R no RStudio com o pacote reticulate"  
 author: 
   - 'Beatriz Milz  <img src="img/retic-featured-image-web2.png" alt="Python Reticulada" style="float:left;height:200px;"> <img src="img/reticulated_python.png" alt="Python Reticulada" style="float:left;height:200px;">'
