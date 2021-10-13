@@ -718,10 +718,29 @@ Ex:
 ]
 
 
+---
+
+## Saiba mais sobre R Markdown em..
+
+.pull-left[
+```{r, out.width="70%"}
+knitr::include_graphics("img/ai-inclusive.jpeg")
+```
+
+Evento da [AI Inclusive](https://pt.ai-inclusive.org/) - [Comunicando os resultados de projetos em Ciência de Dados: Conhecendo o R Markdown](https://www.sympla.com.br/comunicando-os-resultados-de-projetos-em-ciencia-de-dados__1374355)]
 
 
+.pull-right[
+- A AI Inclusive é uma organização global com o objetivo de promover a diversidade na comunidade de IA - Inteligência Artificial.
 
-
+- Siga nas redes sociais!
+  - [<i class="fab fa-twitter"></i> Twitter](https://twitter.com/AIinclusive)
+  - [<i class="fab fa-instagram"></i> Instagram](https://www.instagram.com/ai_inclusive/)
+  - [<i class="fab fa-facebook"></i> Facebook](https://www.facebook.com/aiinclusive)
+  - [<i class="fab fa-linkedin"></i> Linkedin](https://www.linkedin.com/company/ai-inclusive/)  
+  - [<i class="fab fa-youtube"></i> Youtube](https://www.youtube.com/channel/UCrbtq679Z-eOcAb-CTsggjA/featured)
+  - [<i class="fas fa-link"></i> Linktree](https://linktr.ee/ai_inclusive) 
+]
 
 ---
 class: middle, center, inverse
